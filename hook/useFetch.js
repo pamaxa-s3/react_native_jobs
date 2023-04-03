@@ -6,8 +6,6 @@ const useFetch = (endpoint, query) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
 
-	const axios = require("axios");
-
 	const options = {
 		method: 'GET',
 		url: `https://jsearch.p.rapidapi.com/${endpoint}`,
@@ -20,13 +18,14 @@ const useFetch = (endpoint, query) => {
 
 	const fetchData = async () => {
 		setIsLoading(true);
+
 		try {
 			const response = await axios.request(options);
 
 			setData(response.data.data);
 			setIsLoading(false);
 		} catch (error) {
-			setError(true);
+			setError(error);
 			alert('There is an error!')
 		} finally {
 			setIsLoading(false);
